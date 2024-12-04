@@ -8,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="calculator.js"></script>
     <script src="buttons.js"></script>
+    <script src="element.js"></script>
 </head>
 
 <body>
@@ -29,15 +30,15 @@
 
             <!-- UPPER TEXT -->
             <div class="flex-grow flex justify-end items-center w-[100%] rounded-t-lg">
-                <p class="font-bold 
-                max-sm:px-3 max-sm:text-4xl 
-                sm:px-4 sm:text-5xl 
-                lg:px-6 lg:text-7xl">200</p>
+                <p id="upperText" class="font-bold 
+                        max-sm:px-3 max-sm:text-4xl 
+                        sm:px-4 sm:text-5xl 
+                        lg:px-6 lg:text-7xl">200</p>
             </div>
 
             <!-- LOWER TEXT -->
-            <div class="flex justify-end items-center w-[100%] h-[25%] rounded-b-lg bg-zinc-500/30">
-                <p class="max-sm:px-4 max-sm:text-xs 
+            <div id="lowerText" class="flex justify-end items-center w-[100%] h-[25%] rounded-b-lg bg-zinc-500/30">
+                <p id="lowerText" class="max-sm:px-4 max-sm:text-xs 
                           sm: px-5 sm:text-sm 
                           lg: px-7 lg:text-xl">5 + 5 + 5</p>
             </div>
