@@ -1,57 +1,94 @@
-const elementClassStyle = "bg-white rounded-xl flex justify-center items-center"
-const elementClassStyleButton = "bg-gradient-to-b from-white to-zinc-300 shadow-black/50 shadow-md  font-bold select-none border-solid border-2 border-black" + " "
-                              + "hover:from-zinc-100 hover:to-zinc-400" + " "
-                              + "active:from-zinc-300 active:to-white active:shadow-black/50 active:shadow-inner";
-const elementClassStyleOutput = "bg-gradient-to-b from-zinc-200 to-white shadow-inner shadow-black/50 border-black border-solid border-2" + " "
-                              + "flex flex-col divide-y divide-black divide-y-1";
+let equation = "";
 
-/* SIMILAR PARAMETERS TO CSS grid-area */
-const generateElement2 = (rowStart, colStart, rowEnd, colEnd, text = "", id = "") => {
-    document.write(""
-        + "<div class=\""
-        + elementClassStyle + " "
-        + (id == "output" ? elementClassStyleOutput : elementClassStyleButton) + " "
-        + "row-start-[" + rowStart + "] "
-        + "row-end-[" + rowEnd + "] "
-        + "col-start-[" + colStart + "] "
-        + "col-end-[" + colEnd + "]"
-        + "\" "
-        + (id != "" ? ("id=\"" + id + "\" ") : "") + " "
-        + (id != "output" ? "onclick=\"processClick(this)\"" : "")
-        + ">"
-        + (text != "" ? text : "")
-        + "</div>"
-    );
+const checkOperation = (text) => {
+
+    const operations = [
+        {
+            symbol: '=',
+            altCode: 61
+        },
+        {
+            symbol: '+',
+            altCode: 43
+        },
+        {
+            symbol: '-',
+            altCode: 45
+        },
+        {
+            symbol: '*',
+            altCode: 42
+        },
+        {
+            symbol: '/',
+            altCode: 47
+        }
+    ]
+
+    if (text.length == 1) {
+        operations.forEach((op) => {
+            if (text.charCodeAt(0) == op.altCode) {
+                if (op.symbol == '=') {
+                    equation += upperText.innerText + " " + op.symbol;
+                } else {
+                    equation = equation + upperText.innerText + " " + op.symbol + " ";
+                    upperText.innerText = "";
+                }
+                lowerText.innerText = equation;
+            }
+        });
+    }
+
 }
 
-const generateElementPrefix = (rowStart, colStart, rowEnd, colEnd, text = "", id = "") => {
-    document.write(""
-        + "<div class=\""
-        + elementClassStyle + " "
-        + (id == "output" ? elementClassStyleOutput : elementClassStyleButton) + " "
-        + "row-start-[" + rowStart + "] "
-        + "row-end-[" + rowEnd + "] "
-        + "col-start-[" + colStart + "] "
-        + "col-end-[" + colEnd + "]"
-        + "\" "
-        + (id != "" ? ("id=\"" + id + "\" ") : "") + " "
-        + (id != "output" ? "onclick=\"processClick(this)\"" : "")
-        + ">"
-        + (text != "" ? text : "")
-    );
+const checkControl = (text) => {
+
+    switch (text) {
+        case ".":
+            if (!upperText.innerText.includes("."))
+                upperText.innerText += ".";
+            break;
+        case "<":
+            upperText.innerText = upperText.innerText.substring(0, upperText.innerText.length - 1);
+            break;
+        case "CL":
+            equation = "";
+            upperText.innerText = "";
+            lowerText.innerText = equation;
+            break;
+        case "+/-":
+            if (upperText.innerText.charAt(0) == '-') {
+                upperText.innerText = upperText.innerText.substring(1);
+            } else {
+                upperText.innerText = "-" + upperText.innerText;
+            }
+            break;
+        default:
+            break;
+    }
+
 }
 
-const generateElementPostfix = () => {
-    document.write(""
-        + "</div>"
-    );
-}
-
-const generateElement = (rowStart, colStart, rowEnd, colEnd, text = "", id = "") => {
-    generateElementPrefix(rowStart, colStart, rowEnd, colEnd, text, id);
-    generateElementPostfix();
+const processEquation = () => {
 }
 
 const processClick = (el) => {
-    //alert(el.innerText);
+
+    const text = el.innerText;
+    const upperText = document.getElementById("upperText");
+    const lowerText = document.getElementById("lowerText");
+
+    if (!isNaN(Number(text))) {
+        if (upperText.innerText == "0")
+            upperText.innerText = "";
+        upperText.innerText += Number(text);
+    }
+
+    checkOperation(text);
+    checkControl(text);
+
+    if (upperText.innerText == "") {
+        upperText.innerText = "0";
+    }
+
 }
