@@ -23,6 +23,9 @@ const allOperations = [
     }
 ]
 
+/*  - Checks input for an operation symbol and updates the lower section of the UI to the new equation and clears the upper UI
+    - Runs process equation if the "=" button is pressed */
+
 const checkOperation = (text) => {
 
     if (text.length == 1) {
@@ -45,6 +48,7 @@ const checkOperation = (text) => {
 
 }
 
+// Checks input for control buttons
 const checkControl = (text) => {
 
     switch (text) {
@@ -73,6 +77,7 @@ const checkControl = (text) => {
 
 }
 
+// Return a copy of the array with the element at the index removed
 const removeAtIndex = (array, index) => {
     let values = []
     for (let i = 0; i < array.length; i++)
@@ -82,12 +87,14 @@ const removeAtIndex = (array, index) => {
     return values
 }
 
+// Calculate the current equation and returns the answer
 const processEquation = () => {
 
     var current = "";
     var numbers = [];
     var operations = [];
 
+    //Loops through the equations and collects all the numbers and the operations
     for (let i = 0; i < equation.length; i++) {
         let char = equation.charAt(i);
         if (char == ' ') {
@@ -101,6 +108,11 @@ const processEquation = () => {
             current += char;
         }
     }
+
+    /** - Checks equations for each operation (+, -, *, /) in BIDMAS ORDER
+     *  - If it finds an operation it processes the relevenant numbers, updates the numbers array and removes the operation from the operations array 
+     * then repeats the while loop until the current symbol is no longer in the operations array then continues to find operations in BIDMAS order
+    **/
 
     allOperations.forEach((operation) => {
 
@@ -137,15 +149,17 @@ const processEquation = () => {
         }
     });
 
-    return numbers.length == 1 ? Math.round(numbers[0] * 1000000) / 1000000 : NaN
+    return numbers.length == 1 ? Math.round(numbers[0] * 1000000000) / 1000000000 : NaN
 }
 
+// Called from HTML to process a button click
 const processClick = (el) => {
 
     const text = el.innerText;
     const upperText = document.getElementById("upperText");
     const lowerText = document.getElementById("lowerText");
 
+    // Checks if input is a number, if so appends it to upper text
     if (!isNaN(Number(text))) {
         if (upperText.innerText == "0")
             upperText.innerText = "";
@@ -154,6 +168,7 @@ const processClick = (el) => {
         upperText.innerText += Number(text);
     }
 
+    // Calls relevant input checks
     checkOperation(text);
     checkControl(text);
 
