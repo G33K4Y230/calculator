@@ -1,4 +1,5 @@
-let equation = "";
+var equation = "";
+var memory = "";
 
 const allOperations = [
     {
@@ -70,6 +71,12 @@ const checkControl = (text) => {
             } else {
                 upperText.innerText = "-" + upperText.innerText;
             }
+            break;
+        case "M+":
+            memory = upperText.innerText;
+            break;
+        case "MR":
+            upperText.innerText = memory;
             break;
         default:
             break;
