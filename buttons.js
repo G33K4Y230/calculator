@@ -74,9 +74,9 @@ const buttons = [
     {
         text: "9",
         rowStart: 5,
-        colStart: 1,
+        colStart: 3, 
         rowEnd: 6,
-        colEnd: 2
+        colEnd: 4
     },
     {
         text: "8",
@@ -87,17 +87,18 @@ const buttons = [
     },
     {
         text: "7",
+        
         rowStart: 5,
-        colStart: 3, 
+        colStart: 1,
         rowEnd: 6,
-        colEnd: 4
+        colEnd: 2
     },
     {
         text: "6",
         rowStart: 6,
-        colStart: 1,
+        colStart: 3,
         rowEnd: 7,
-        colEnd: 2
+        colEnd: 4
     },
     {
         text: "5",
@@ -109,16 +110,16 @@ const buttons = [
     {
         text: "4",
         rowStart: 6,
-        colStart: 3,
+        colStart: 1,
         rowEnd: 7,
-        colEnd: 4
+        colEnd: 2
     },
     {
         text: "3",
         rowStart: 7,
-        colStart: 1,
+        colStart: 3,
         rowEnd: 8,
-        colEnd: 2
+        colEnd: 4
     }, 
     {
         text: "2",
@@ -130,9 +131,9 @@ const buttons = [
     {
         text: "1",
         rowStart: 7,
-        colStart: 3,
+        colStart: 1,
         rowEnd: 8,
-        colEnd: 4
+        colEnd: 2
     },
     {
         text: "0",
