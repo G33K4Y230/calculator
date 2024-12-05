@@ -1,3 +1,5 @@
+//Description of button grid positions
+
 const buttons = [
     {
         text: "CL",
